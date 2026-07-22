@@ -130,4 +130,4 @@ Keeping the `<td>`s in sync with the `board` array by hand - clearing and rebuil
 
 Commit and push to `origin` (don't commit `node_modules/` or `dist/` - they're generated; the `.gitignore` excludes them). The graded state is whatever is on `main`.
 
-> **AI policy:** this lab is **hand-coded**. You may ask an AI assistant to *explain* a DOM API or *interpret* an error, but write the controller yourself. (A later lab is explicitly about coding *with* AI tools.) See `project/ai-policy.md`.
+> **AI policy:** this lab is hand-coded. You may ask an AI assistant to explain a DOM API or interpret an error, but write the controller yourself. See `project/ai-policy.md`.
