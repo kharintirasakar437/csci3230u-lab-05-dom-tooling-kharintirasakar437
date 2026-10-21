@@ -47,7 +47,6 @@ function renderBoard() {
     for(let c= 0;c<9;c++){
       let td=document.createElement("td");
         td.id=`cell-${r}-${c}`;
-        let boardValue=getCell(board,r,c);
         let sampleValue=getCell(SAMPLE_BOARD,r,c);
         let currentValue=getCell(board,r,c);
         if(currentValue===EMPTY){
@@ -56,7 +55,7 @@ function renderBoard() {
         else{
           td.innerHTML=currentValue;
         }
-        if(currentValue!=EMPTY && boardValue===EMPTY){
+        if(currentValue!=EMPTY && sampleValue===EMPTY){
           td.classList.add('user-input');
         }
         td.addEventListener('click', ()=>{
