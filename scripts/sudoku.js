@@ -41,8 +41,35 @@ const paletteEl = document.getElementById('palette')
  *  - append the rows, then call highlightConflicts()
  */
 function renderBoard() {
-  // TODO
-}
+  boardEl.innerHTML='';
+  for (let r=0; r<9;r++){
+    let tr=document.createElement("tr");
+    for(let c= 0;c<9;c++){
+      let td=document.createElement("td");
+        td.id=`cell-${r}-${c}`;
+        let boardValue=getCell(board,r,c);
+        let sampleValue=getCell(SAMPLE_BOARD,r,c);
+        let currentValue=getCell(board,r,c);
+        if(currentValue===EMPTY){
+          td.innerHTML='';
+        }
+        else{
+          td.innerHTML=currentValue;
+        }
+        if(currentValue!=EMPTY && boardValue===EMPTY){
+          td.classList.add('user-input');
+        }
+        td.addEventListener('click', ()=>{
+          placeAt(r,c);
+        })
+        tr.appendChild(td);    
+      }
+      boardEl.appendChild(tr)
+    }
+    highlightConflicts();
+  }
+  
+
 
 /**
  * Toggle the 'error' class on every cell that currently conflicts.
@@ -51,6 +78,15 @@ function renderBoard() {
  */
 function highlightConflicts() {
   // TODO
+  for(let r = 0;r<9;r++){
+    for(let c=0;c<9;c++){
+      const cell = document.getElementById(`cell-${r}-${c}`);
+      if(cell){
+        const conflicts = findConflicts(board,r,c);
+        cell.classList.toggle('error', conflicts.length>0);
+      }
+    }
+  }
 }
 
 /**
@@ -63,7 +99,26 @@ function highlightConflicts() {
  */
 function renderPalette() {
   // TODO
-}
+  paletteEl.innerHTML="";
+  const row = document.createElement('tr');
+  
+  
+  for(let d=1;d<=9;d++){
+      const cell=document.createElement('td');
+      cell.textContent=d;
+      cell.addEventListener('click',()=>selectDigit(d));
+      row.appendChild(cell);
+    }
+    const undoButton = document.createElement('td');
+    const img = document.createElement('img');
+    img.src="/images/undo.png";
+    img.alt="undo";
+    undoButton.appendChild(img);
+    undoButton.addEventListener('click',undo);
+    row.appendChild(undoButton);
+    paletteEl.appendChild(row);
+  }
+
 
 // ---- interaction ----------------------------------------------------
 
@@ -73,6 +128,14 @@ function renderPalette() {
  */
 function selectDigit(digit) {
   // TODO
+  activeDigit=digit;
+
+  
+  activeDigit=digit;
+  const cells=paletteEl.querySelectorAll("td");
+  cells.forEach((cell,index) => {
+    cell.classList.toggle('active',index+1===digit);
+  });
 }
 
 /**
@@ -85,11 +148,30 @@ function selectDigit(digit) {
  */
 function placeAt(row, col) {
   // TODO
+
+  if(activeDigit===null){
+    return;
+  }
+  if(getCell(SAMPLE_BOARD,row,col)!==EMPTY){
+    return;
+  }
+
+  history.push(structuredClone(board));
+  setCell(board,row,col,activeDigit);
+  renderBoard();
+  if(isComplete(board)==true){
+    celebrate();
+  }
+
 }
 
 /** Step back one move. TODO: if history isn't empty, pop into `board`, re-render. */
 function undo() {
   // TODO
+  if(history.length>0){
+    board=history.pop();
+    renderBoard();
+  }
 }
 
 // ---- finishing (done for you) ---------------------------------------

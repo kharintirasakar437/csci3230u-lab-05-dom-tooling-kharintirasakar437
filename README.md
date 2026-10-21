@@ -69,7 +69,7 @@ This starter adds the new pieces:
    </head>
    …
    <a class="brand" href="index.html">
-     <img src="/images/logo.gif" alt="" />
+     <img src="public/images/logo.gif" alt="" />
      Sudoku Centre
    </a>
    …
