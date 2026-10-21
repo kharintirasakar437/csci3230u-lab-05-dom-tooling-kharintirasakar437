@@ -133,7 +133,7 @@ npm run preview    # serves dist/ so you can check the production build
 
 ## Reflection (include a short note in the repo)
 
-Keeping the `<td>`s in sync with the `board` array by hand - clearing and rebuilding on every move - is tedious and easy to get wrong. That is why component frameworks exist. Next phase: React does this syncing for you.
+Keeping the `<td>`s in sync with the `board` array by hand - clearing and rebuilding on every move - is tedious and easy to get wrong. That is why component frameworks exist. Next phase: React does this syncing for you. I leanred about the importance of stacks in web developmetn and game logic. I also learned that dom and vites allow for more interactivity in websites. Next lab I am excited to learn about security as this lab taught me a lot.
 
 ## How you're graded
 
