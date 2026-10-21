@@ -157,7 +157,7 @@ function placeAt(row, col) {
   }
 
   history.push(structuredClone(board));
-  setCell(board,row,col,activeDigit);
+  board=setCell(board,row,col,activeDigit);
   renderBoard();
   if(isComplete(board)==true){
     celebrate();
